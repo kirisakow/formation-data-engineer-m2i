@@ -4,4 +4,4 @@ Contenu de la formation : https://webcache.googleusercontent.com/search?q=cache:
 
 ### Modules
 
-[2023/03/29 — 2023/03/29](https://github.com/kirisakow/formation-data-engineer-m2i/blob/2023.03.29.python.algorithmie.et.POO/2023.03.29.python.algorithmie.et.POO/exercices.ipynb) : Algorithmie et programmation orientée objet en Python dans Visual Studio Code
+[2023/03/29 — 2023/04/07](https://github.com/kirisakow/formation-data-engineer-m2i/blob/2023.03.29.python.algorithmie.et.POO/2023.03.29.python.algorithmie.et.POO/exercices.ipynb) : Algorithmie et programmation orientée objet (POO) en Python dans Visual Studio Code. Formateur : [Pierre GAILLARD](https://fr.linkedin.com/in/pierre--gaillard)
