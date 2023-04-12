@@ -2,7 +2,7 @@
 
 ## Prérequis
 
-* Python 3.7+
+* Python 3.7+ et dépendances: cf `requirements.txt`
 * Git
 * Docker, Docker-Compose
 
