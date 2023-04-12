@@ -1,6 +1,8 @@
 -- créations des bases de données
 CREATE DATABASE IF NOT EXISTS exercice;
 
+use exercice;
+
 -- création des tables
 CREATE TABLE clients (
     id INT PRIMARY KEY,
