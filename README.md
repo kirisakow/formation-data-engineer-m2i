@@ -1,14 +1,20 @@
 # Exercice projet
 
-## Installation
+## Prérequis
 
-### 1. Créer les fichiers obligatoires pour un projet GitHub
+* Python 3.7+
+* Git
+* Docker, Docker-Compose
+
+### Créer les fichiers obligatoires pour un projet GitHub
 
 * `.gitignore`
 * `LICENSE` (voir https://choosealicense.com/)
 * `README.md`
 
-### 2. Créer un environment virtuel Python (venv)
+## Installation
+
+### Créer un environment virtuel Python (venv)
 
 - Créer un environnement virtuel
     ```bash
@@ -29,8 +35,9 @@
     # Windows (powershell)
     .venv/Scripts/Activate.ps1
     ```
-- Installer les dépendances
-    ```bash
-    pip install -r requirements.txt
-    ```
 
+### Installer les dépendances
+
+```bash
+pip install -r requirements.txt
+```
