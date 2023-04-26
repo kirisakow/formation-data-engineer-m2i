@@ -10,13 +10,23 @@
 # "Ceci n'est pas un nombre"
 
 if (( $# != 1 )); then
-    echo "Aucun nombre passé en paramètre. Usage : $(basename "$0") <nombre entier>"
+    echo "Aucun nombre passé en paramètre. Usage : $(basename "$0") <nombre entier>" >&2
     exit 1
 fi
 
+function is_number() {
+    value_to_test=$1
+    code_retour=1
+    if [[ $value_to_test =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]
+    then
+        code_retour=0
+    fi
+    return $code_retour
+}
+
 nombre=$1
 
-if [[ ! $nombre =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]; then
+if ! is_number "$nombre" ; then
     echo "erreur : $nombre n'est pas un nombre"
     exit 1
 elif ((nombre < 0)); then
