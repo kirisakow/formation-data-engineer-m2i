@@ -15,7 +15,7 @@ fi
 function is_number() {
     value_to_test=$1
     code_retour=1
-    if [[ $value_to_test =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]
+    if [[ $value_to_test =~ ^[+-]?[0-9]*([.][0-9]+)?$ ]]
     then
         code_retour=0
     fi
