@@ -16,7 +16,10 @@ fi
 
 nombre=$1
 
-if ((nombre < 0)); then
+if [[ ! $nombre =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]; then
+    echo "erreur : $nombre n'est pas un nombre"
+    exit 1
+elif ((nombre < 0)); then
     echo "Vous avez entré un nombre négatif"
     exit 0
 elif ((nombre == 0)); then
@@ -25,7 +28,4 @@ elif ((nombre == 0)); then
 elif ((nombre > 0)); then
     echo "Vous avez entré un nombre positif"
     exit 0
-elif ! [[ $nombre =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]; then
-    echo "erreur : $nombre n'est pas un nombre"
-    exit 1
 fi
