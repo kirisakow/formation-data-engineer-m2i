@@ -40,9 +40,9 @@ fi
 shopt -s extglob
 case "${operateur}" in
     !(+|-|/|\*|x) ) usage >&2 ; exit 1 ;;
-    @(+)         ) echo $((operand1 + operand2)) ;;
-    @(-)         ) echo $((operand1 - operand2)) ;;
-    @(/)         ) echo $((operand1 / operand2)) ;;
-    @(\*|x)       ) echo $((operand1 * operand2)) ;;
-    *            ) usage >&2 ; exit 1 ;;
+    @(+)    ) bc -l <<< "$operand1 + $operand2" ;;
+    @(-)    ) bc -l <<< "$operand1 - $operand2" ;;
+    @(/)    ) bc -l <<< "$operand1 / $operand2" ;;
+    @(\*|x) ) bc -l <<< "$operand1 * $operand2" ;;
+    * ) usage >&2 ; exit 1 ;;
 esac
