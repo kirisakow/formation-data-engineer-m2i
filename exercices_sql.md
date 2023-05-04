@@ -336,6 +336,7 @@ WHERE ID_PAYS in (
 )
 ;
 -- 3 rows
+
 ```
 ### 22. Lister les tickets sur lesquels apparaissent un des articles apparaissant aussi sur le ticket 2014-856 (le ticket 856 de l’année 2014).
 ```sql
@@ -365,7 +366,17 @@ WHERE titrage > (
 ```
 ### 24. Éditer les quantités vendues pour chaque couleur en 2014.
 ```sql
-
+SELECT
+    ID_Couleur,
+    NOM_COULEUR,
+    sum(QUANTITE) as "quantités vendues pour chaque couleur en 2014"
+FROM article
+JOIN couleur USING(ID_Couleur)
+JOIN ventes USING(id_article)
+	WHERE ANNEE = 2014
+GROUP BY ID_Couleur, NOM_COULEUR
+;
+-- 4 row(s) in 0,016 sec
 ```
 ### 25. Donner pour chaque fabricant, le nombre de tickets sur lesquels apparait un de ses produits en 2014.
 ```sql
