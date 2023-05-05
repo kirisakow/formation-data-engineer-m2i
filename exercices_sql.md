@@ -48,7 +48,6 @@ WHERE
 ;
 -- NUMERO_TICKET, DATE_VENTE
 -- 37	2014-01-15 00:00:00
-
 ```
 ### 3. Afficher les tickets émis du 15/01/2014 et le 17/01/2014.
 ```sql
@@ -336,7 +335,6 @@ WHERE ID_PAYS in (
 )
 ;
 -- 3 rows
-
 ```
 ### 22. Lister les tickets sur lesquels apparaissent un des articles apparaissant aussi sur le ticket 2014-856 (le ticket 856 de l’année 2014).
 ```sql
@@ -356,7 +354,7 @@ WHERE ID_ARTICLE IN (
 SELECT ID_ARTICLE
 FROM article
 WHERE titrage > (
-	SELECT max(TITRAGE) as "la plus forte des trappistes"
+	SELECT MAX(TITRAGE) as "la plus forte des trappistes"
 	FROM article
 	JOIN type USING(ID_TYPE)
 	WHERE NOM_TYPE = 'Trappiste'
@@ -372,27 +370,135 @@ SELECT
     sum(QUANTITE) as "quantités vendues pour chaque couleur en 2014"
 FROM article
 JOIN couleur USING(ID_Couleur)
-JOIN ventes USING(id_article)
+JOIN ventes USING(ID_ARTICLE)
 	WHERE ANNEE = 2014
 GROUP BY ID_Couleur, NOM_COULEUR
 ;
--- 4 row(s) in 0,016 sec
+-- 4 row(s) in 0,031 sec
+-- ID_Couleur, NOM_COULEUR, quantités vendues pour chaque couleur en 2014
+-- 1           Ambrée       31427
+-- 2           Blanche      14416
+-- 3           Blonde       72569
+-- 4           Brune        49842
 ```
 ### 25. Donner pour chaque fabricant, le nombre de tickets sur lesquels apparait un de ses produits en 2014.
 ```sql
-
+SELECT
+	ID_FABRICANT,
+    COUNT(DISTINCT NUMERO_TICKET) as nb_tickets_2014_avec_articles_du_fabricant
+FROM fabricant
+JOIN (
+	SELECT DISTINCT ID_FABRICANT, article.ID_ARTICLE
+	FROM fabricant
+	JOIN marque USING(ID_FABRICANT)
+	JOIN article USING(ID_marque)
+) articles_par_fabricant USING(ID_FABRICANT)
+JOIN ventes USING(ID_ARTICLE)
+	WHERE ANNEE = 2014
+GROUP BY ID_FABRICANT
+;
+--
+SELECT DISTINCT
+    ID_FABRICANT,
+    COUNT(DISTINCT NUMERO_TICKET) as nb_tickets_2014_avec_articles_du_fabricant
+FROM fabricant
+JOIN marque USING(ID_FABRICANT)
+JOIN article USING(ID_marque)
+JOIN ventes USING(ID_ARTICLE)
+	WHERE ANNEE = 2014
+GROUP BY ID_FABRICANT
+;
+-- ID_FABRICANT, nb_tickets_2014_avec_articles_du_fabricant
+-- 1             208
+-- 2             33
+-- 3             2
+-- 4             61
+-- 5             162
+-- 6             26
+-- 7             26
+-- 8             35
+-- 9             27
+-- 10            13
 ```
 ### 26. Donner l’ID, le nom, le volume et la quantité vendue des 20 articles les plus vendus en 2016.
 ```sql
-
+SELECT ID_ARTICLE, NOM_ARTICLE, VOLUME, SUM(QUANTITE) as quantite_totale
+FROM article
+JOIN ventes USING(ID_ARTICLE)
+	WHERE ANNEE = 2016
+GROUP BY ID_ARTICLE
+ORDER BY quantite_totale desc
+LIMIT 20
+;
+-- ID_ARTICLE,  NOM_ARTICLE,                     VOLUME,  quantite_totale
+-- 3192         Cuvée Spéciale Cuvée des Trolls  75       597
+-- 3631         Home                             75       596
+-- 2304         Damruz                           75       581
+-- 3850         Robust Porter                    75       576
+-- 1469         Lagaille Rouquinette             33       551
+-- 1844         Twin Peaks                       33       540
+-- 86           Desperados                       33       539
+-- 2158         Japan Pale Ale                   75       537
+-- 1477         Lutine Blonde (la)               33       518
+-- 2248         Waterloo Rossa                   75       517
+-- 162          Volpina                          33       516
+-- 2749         Salève Weizen                    75       512
+-- 3588         Trappe Puur (la)                 75       502
+-- 1258         Smoked Rye IPA                   33       500
+-- 1294         Fort Indian Pale Ale             33       499
+-- 3526         Stout 8                          75       499
+-- 768          Mastoc                           33       496
+-- 2305         Hini Du                          75       491
+-- 1110         Mamouche                         33       489
+-- 3789         Methusalem                       75       488
 ```
 ### 27. Donner l’ID, le nom, le volume et la quantité vendue des 5 ‘Trappistes’ les plus vendus en 2016.
 ```sql
-
+SELECT ID_ARTICLE, NOM_ARTICLE, VOLUME, SUM(QUANTITE) as quantite_totale
+FROM article
+JOIN ventes USING(ID_ARTICLE)
+JOIN type USING(id_type)
+WHERE ANNEE = 2016
+	AND NOM_TYPE = 'Trappiste'
+GROUP BY ID_ARTICLE
+ORDER BY quantite_totale desc
+LIMIT 5
+;
+-- ID_ARTICLE,  NOM_ARTICLE,      VOLUME,  quantite_totale
+-- 3588         Trappe Puur (la)  75       502
+-- 2100         Achel Blonde      75       436
+-- 120          Chimay Première   33       393
+-- 2101         Achel Brune       75       371
+-- 2104         Rochefort 6       75       357
 ```
 ### 28. Donner l’ID, le nom, le volume et les quantités vendues en 2015 et 2016, des bières dont les ventes ont été stables. (Moins de 1% de variation)
 ```sql
-
+SELECT
+	ID_ARTICLE, NOM_ARTICLE, VOLUME,
+    t2015.quantite_vendue AS quantite_vendue_2015,
+    t2016.quantite_vendue AS quantite_vendue_2016,
+	ABS((t2016.quantite_vendue - t2015.quantite_vendue) / t2015.quantite_vendue * 100) as variation_2015_2016
+FROM article
+INNER JOIN (
+	SELECT ID_ARTICLE, SUM(QUANTITE) as quantite_vendue
+	FROM article
+	JOIN ventes USING(ID_ARTICLE)
+		WHERE ANNEE = 2015
+	GROUP BY ID_ARTICLE
+	ORDER BY quantite_vendue desc
+) t2015 USING(ID_ARTICLE)
+INNER JOIN (
+	SELECT ID_ARTICLE, SUM(QUANTITE) as quantite_vendue
+	FROM article
+	JOIN ventes USING(ID_ARTICLE)
+		WHERE ANNEE = 2016
+	GROUP BY ID_ARTICLE
+	ORDER BY quantite_vendue desc
+) t2016 USING(ID_ARTICLE)
+WHERE ABS((t2016.quantite_vendue - t2015.quantite_vendue) / t2015.quantite_vendue * 100) < 1
+ORDER BY variation_2015_2016 asc
+;
+-- 29 row(s) returned	0.156 sec
 ```
 ### 29. Lister les types de bières suivant l’évolution de leurs ventes entre 2015 et 2016. Classer le résultat par ordre décroissant des performances.
 ```sql
