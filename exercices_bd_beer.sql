@@ -477,7 +477,7 @@ SELECT
 	ID_ARTICLE, NOM_ARTICLE, VOLUME,
     t2015.quantite_vendue AS quantite_vendue_2015,
     t2016.quantite_vendue AS quantite_vendue_2016,
-	ABS((t2016.quantite_vendue - t2015.quantite_vendue) / t2015.quantite_vendue * 100) as variation_2015_2016
+	CONCAT(ROUND((t2016.quantite_vendue - t2015.quantite_vendue) / t2015.quantite_vendue * 100, 2), ' %') as variation_2015_2016
 FROM article
 INNER JOIN (
 	SELECT ID_ARTICLE, SUM(QUANTITE) as quantite_vendue
