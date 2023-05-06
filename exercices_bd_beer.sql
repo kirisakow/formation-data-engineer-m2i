@@ -544,7 +544,17 @@ ORDER BY evolution_2015_2016 DESC
 
 ### 30. Existe-t-il des tickets sans vente ?
 
-
+SELECT DISTINCTROW
+    numero_ticket,
+    annee
+FROM ticket
+LEFT JOIN ventes USING(numero_ticket, annee)
+    WHERE id_article IS NULL
+;
+-- numero_ticket  annee
+-- 2065           2015
+-- 1138           2016
+-- 1452           2016
 
 ### 31. Lister les produits vendus en 2016 dans des quantités jusqu’à -15% des quantités de l’article le plus vendu.
 
