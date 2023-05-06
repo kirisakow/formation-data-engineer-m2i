@@ -502,7 +502,45 @@ ORDER BY variation_2015_2016 asc
 
 ### 29. Lister les types de bières suivant l’évolution de leurs ventes entre 2015 et 2016. Classer le résultat par ordre décroissant des performances.
 
-
+SELECT
+    type.id_type,
+    nom_type,
+    t2015.ca_par_type AS ca_2015,
+    t2016.ca_par_type AS ca_2016,
+    CONCAT(ROUND((t2016.ca_par_type - t2015.ca_par_type) / t2015.ca_par_type * 100, 2), ' %') AS evolution_2015_2016
+FROM type
+JOIN (
+    SELECT type.id_type, ROUND(SUM(prix_achat * quantite), 2) as ca_par_type
+    FROM type
+    JOIN article USING(id_type)
+    JOIN ventes USING(id_article)
+        WHERE annee = 2015
+    GROUP BY type.id_type
+) t2015 USING(id_type)
+JOIN (
+    SELECT type.id_type, ROUND(SUM(prix_achat * quantite), 2) as ca_par_type
+    FROM type
+    JOIN article USING(id_type)
+    JOIN ventes USING(id_article)
+        WHERE annee = 2016
+    GROUP BY type.id_type
+) t2016 USING(id_type)
+ORDER BY evolution_2015_2016 DESC
+;
+-- id_type  nom_type          ca_2015    ca_2016     evoLlution_2015_2016
+-- 7        Bio               4504.28    8335.02     85.05 %
+-- 13       Trappiste         16092.24   28853.96    79.30 %
+-- 12       Stout             131278.29  224374.89   70.92 %
+-- 11       Pils et Lager     47881.33   81620.75    70.46 %
+-- 9        Indian Pale Ale   38119.3    64772.92    69.92 %
+-- 3        Ale               180373.43  301881.56   67.36 %
+-- 2        Abbaye            53609.00   88798.11    65.64 %
+-- 8        Bock              8041.89    13274.37    65.07 %
+-- 5        Biere de Garde    8507.11    13953.04    64.02 %
+-- 6        Biere de Saison   49028.38   78344.34    59.79 %
+-- 4        Barley Wine       10554.02   16385.47    55.25 %
+-- 1        Biere Aromatisée  92583.91   143479.24   54.97 %
+-- 10       Lambic            20351.49   28555.82    40.31 %
 
 ### 30. Existe-t-il des tickets sans vente ?
 
