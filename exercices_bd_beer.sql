@@ -558,7 +558,51 @@ LEFT JOIN ventes USING(numero_ticket, annee)
 
 ### 31. Lister les produits vendus en 2016 dans des quantités jusqu’à -15% des quantités de l’article le plus vendu.
 
-
+SELECT
+    id_article,
+    qte_vendue_en_2016,
+    CONCAT(ROUND(varia_rap_au_top_art_2016, 2), ' %') AS varia_rap_au_top_art_2016
+FROM (
+    SELECT
+        id_article,
+        qte_vendue_en_2016,
+        ((qte_vendue_en_2016 - top_qte_2016) / top_qte_2016 * 100) AS varia_rap_au_top_art_2016
+    FROM (
+        SELECT
+            t_top_art_2016.id AS top_id_art_2016,
+            t_top_art_2016.qte AS top_qte_2016,
+            ventes.id_article,
+            SUM(ventes.quantite) AS qte_vendue_en_2016
+        FROM ventes, (
+            SELECT
+                id_article AS id,
+                SUM(quantite) AS qte
+            FROM ventes
+            WHERE annee = 2016
+            GROUP BY id
+            ORDER BY qte DESC
+            LIMIT 1
+        ) t_top_art_2016
+        WHERE annee = 2016
+        GROUP BY top_id_art_2016, top_qte_2016, ventes.id_article
+        ORDER BY qte_vendue_en_2016 DESC
+    ) t_qte
+) t_varia
+WHERE ABS(varia_rap_au_top_art_2016) < 15
+;
+-- id_article  qte_vendue_en_2016  varia_rap_au_top_art_2016
+-- 3192        597                  0.00 %
+-- 3631        596                 -0.17 %
+-- 2304        581                 -2.68 %
+-- 3850        576                 -3.52 %
+-- 1469        551                 -7.71 %
+-- 1844        540                 -9.55 %
+-- 86          539                 -9.72 %
+-- 2158        537                 -10.05 %
+-- 1477        518                 -13.23 %
+-- 2248        517                 -13.40 %
+-- 162         516                 -13.57 %
+-- 2749        512                 -14.24 %
 
 ### 32. Appliquer une augmentation de tarif de 10% pour toutes les bières ‘Trappistes’ de couleur ‘Blonde’
 
