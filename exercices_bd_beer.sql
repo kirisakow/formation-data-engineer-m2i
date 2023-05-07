@@ -606,16 +606,84 @@ WHERE ABS(varia_rap_au_top_art_2016) < 15
 
 ### 32. Appliquer une augmentation de tarif de 10% pour toutes les bières ‘Trappistes’ de couleur ‘Blonde’
 
+UPDATE article
+JOIN type USING(id_type)
+JOIN couleur USING(id_couleur)
+SET prix_achat = ROUND(prix_achat * 1.1, 2)
+WHERE nom_type = 'Trappiste'
+    AND nom_couleur = 'Blonde'
+;
+COMMIT;
+-- avant  apres
+-- 2.8    3.08
+-- 2.85   3.13
+-- 2.06   2.27
+-- 2.23   2.45
+-- 2.76   3.04
+-- 1.79   1.97
+-- 1.21   1.33
+-- 1.34   1.47
+-- 2.1    2.31
+-- 1.62   1.78
+-- 1.07   1.18
+-- 1.03   1.13
+-- 2.64   2.9
+-- 4.19   4.61
+-- 1.93   2.12
+-- 4.8    5.28
+-- 3.36   3.7
+-- 4.65   5.12
+-- 4.57   5.03
+-- 1.07   1.18
+-- 3.08   3.39
+-- 1.82   2
 
 
 ### 33. Mettre à jour le degré d’alcool des toutes les bières n’ayant pas cette information. On y mettra le degré d’alcool de la moins forte des bières du même type et de même couleur.
 
-
+UPDATE article
+LEFT JOIN type USING(id_type)
+LEFT JOIN couleur USING(id_couleur)
+LEFT JOIN (
+    SELECT DISTINCTROW
+        article.id_type,
+        article.id_couleur,
+        MIN(titrage) AS titrage_min
+    FROM article
+    LEFT JOIN type USING(id_type)
+    LEFT JOIN couleur USING(id_couleur)
+    GROUP BY article.id_type, article.id_couleur
+) t_titr_min USING(id_type, id_couleur)
+SET titrage = titrage_min
+WHERE titrage IS NULL
+   OR titrage REGEXP '^\s*$'
+;
+COMMIT;
+-- Avant l'opération : 28 articles au titrage nul
+-- Après l'opération : 6 articles valorisés et 22 toujours à nul
 
 ### 34. Suppression des bières qui ne sont pas des bières ! (Type ‘Bière Aromatisée’)
 
-
+SET FOREIGN_KEY_CHECKS = 0;
+DELETE type, article, ventes
+FROM type
+LEFT JOIN article USING(id_type)
+LEFT JOIN ventes USING(id_article)
+WHERE nom_type = 'Bière Aromatisée'
+;
+SET FOREIGN_KEY_CHECKS = 1;
+COMMIT;
+-- Résultat :
+-- table type:    1 ligne supprimée
+-- table article: 262 lignes supprimées
+-- table ventes:  4176 lignes supprimées
 
 ### 35. Supprimer les tickets qui n’ont pas de ventes.
 
-
+DELETE ticket, ventes
+FROM ticket
+LEFT JOIN ventes USING(annee, numero_ticket)
+WHERE id_article IS NULL
+;
+-- Résultat :
+-- table ticket: 9 lignes supprimées
