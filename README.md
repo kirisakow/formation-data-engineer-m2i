@@ -13,3 +13,4 @@ Contenu de la formation : https://webcache.googleusercontent.com/search?q=cache:
 | [2023/04/17 — ...](https://github.com/projet-data-code-de-source) | Projet data en groupe | [Romain VASSEUR](https://www.linkedin.com/in/romain-vasseur-baa89898/) |
 | [2023/04/18 — 2023/04/28](https://github.com/kirisakow/formation-data-engineer-m2i/tree/2023.04.25.bash.scripting) | Fondamentaux de Linux et la programmation Shell avec BASH | [Léo DUGAUGUEZ](https://www.linkedin.com/in/léo-dugauguez/) |
 | [2023/05/02 — 2023/05/05](https://github.com/kirisakow/formation-data-engineer-m2i/tree/2023.05.03.sql.mysql) | Langage SQL : Fondamentaux | [Pierre GAILLARD](https://fr.linkedin.com/in/pierre--gaillard) |
+| 2023/05/09 — 2023/05/11 | Agilité et Pilotage de projets | [Luigi MENEZ](https://www.linkedin.com/in/luigi-menez-03a398221/) |
