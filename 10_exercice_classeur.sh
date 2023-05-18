@@ -25,7 +25,7 @@ function determiner_extension () {
 }
 
 repertoire_cible=$1
-repertoire_cible_absolu=$(cd "$(dirname "$repertoire_cible")" || exit 1; pwd)
+repertoire_cible_absolu=$(realpath "$repertoire_cible")
 echo "Le répertoire cible est : $repertoire_cible_absolu"
 mkdir -p "$repertoire_cible_absolu" || exit 1
 cd "$repertoire_cible_absolu" || exit 1
