@@ -59,13 +59,22 @@ a0321845dda3   liliasfaxi/spark-hadoop:hv-2.7.2   "sh -c 'service ssh …"   4 m
 9d9988769032   liliasfaxi/spark-hadoop:hv-2.7.2   "sh -c 'service ssh …"   25 minutes ago   Up 25 minutes   0.0.0.0:7077->7077/tcp, 0.0.0.0:8088->8088/tcp, 0.0.0.0:16010->16010/tcp, 0.0.0.0:50070->50070/tcp   hadoop-master
 ```
 
-## 6. Se connecter à la machine du container `hadoop-master`:
+## 6. Copier le fichier texte `exemple.txt` depuis la machine hôte vers le container
+
+```bash
+docker cp ./exemple.txt hadoop-master:/root/
+```
+```
+Successfully copied 10.8kB to hadoop-master:/root/
+```
+
+## 7. Se connecter à la machine du container `hadoop-master`:
 
 ```bash
 docker exec -it hadoop-master /bin/bash
 ```
 
-## 6.1. Lancer `hadoop`
+## 7.1. Lancer `hadoop`
 
 ```bash
 ./start-hadoop.sh
@@ -91,7 +100,7 @@ hadoop-slave1: nodemanager running as process 173. Stop it first.
 hadoop-slave2: nodemanager running as process 173. Stop it first.
 ```
 
-## 6.2. Créer un dossier distribué, nommé `input`
+## 7.2. Créer un dossier distribué, nommé `input`
 
 ```bash
 # -mkdir [-p] <path> ... :
@@ -113,7 +122,7 @@ drwxr-xr-x   - root supergroup          0 2023-05-22 14:37 input
 ls
 ```
 
-## 6.3. Charger un fichier dans le système distribué HDFS
+## 7.3. Charger un fichier dans le système distribué HDFS
 
 ```bash
 # -put [-f] [-p] [-l] <localsrc> ... <dst> :
@@ -125,15 +134,15 @@ ls
 #   -l  Allow DataNode to lazily persist the file to disk. Forces
 #          replication factor of 1. This flag will result in reduced
 #          durability. Use with care.
-hadoop fs -put ./purchases.txt input
+hadoop fs -put ./exemple.txt input
 
 # -copyFromLocal [-f] [-p] [-l] <localsrc> ... <dst> :
 #   Identical to the -put command.
-hadoop fs -copyFromLocal ./purchases.txt input
+hadoop fs -copyFromLocal ./exemple.txt input
 
 # -moveFromLocal <localsrc> ... <dst> :
 #   Same as -put, except that the source is deleted after it's copied.
-hadoop fs -moveFromLocal ./purchases.txt input
+hadoop fs -moveFromLocal ./exemple.txt input
 ```
 Pour voir le fichier chargé :
 ```bash
@@ -141,21 +150,21 @@ hadoop fs -ls input
 ```
 ```
 Found 1 items
--rw-r--r--   2 root supergroup  211312924 2023-05-22 14:37 input/purchases.txt
+-rw-r--r--   2 root supergroup  211312924 2023-05-22 14:37 input/exemple.txt
 ```
 Pour un aperçu du contenu du fichier distribué :
 ```bash
 # pour voir les premières lignes
-hadoop fs -cat input/purchases.txt | head
+hadoop fs -cat input/exemple.txt | head
 
 # pour voir les dernières lignes
-hadoop fs -tail input/purchases.txt
+hadoop fs -tail input/exemple.txt
 
 # autre possibilité de voir les dernières lignes (extrêmement lente)
-hadoop fs -cat input/purchases.txt | tail
+hadoop fs -cat input/exemple.txt | tail
 ```
 
-## 7. Copier le JAR depuis la machine hôte vers le container
+## 8. Copier le JAR depuis la machine hôte vers le container
 
 ```bash
 docker cp ./WordCount.jar hadoop-master:/root/
@@ -168,11 +177,13 @@ Successfully copied 5.12kB to hadoop-master:/root/
 docker exec -it hadoop-master /bin/bash
 ```
 
-## 8. Exécuter un job de comptage de mots
+## 9. Exécuter un job de comptage de mots
 
 ```bash
 hadoop jar ./WordCount.jar WordCount input output
 ```
-```
 
+Pour voir un aperçu des résultats :
+```bash
+hadoop fs -cat output/part* | head
 ```
