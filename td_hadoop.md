@@ -113,7 +113,7 @@ drwxr-xr-x   - root supergroup          0 2023-05-22 14:37 input
 ls
 ```
 
-## 9. Charger un fichier dans le système distribué HDFS
+## 6.3. Charger un fichier dans le système distribué HDFS
 
 ```bash
 # -put [-f] [-p] [-l] <localsrc> ... <dst> :
@@ -155,3 +155,11 @@ hadoop fs -tail input/purchases.txt
 hadoop fs -cat input/purchases.txt | tail
 ```
 
+## 7. Copier le JAR depuis la machine hôte vers le container
+
+```bash
+docker cp ./WordCount.jar hadoop-master:/root/
+```
+```
+Successfully copied 5.12kB to hadoop-master:/root/
+```
