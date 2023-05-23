@@ -163,3 +163,16 @@ docker cp ./WordCount.jar hadoop-master:/root/
 ```
 Successfully copied 5.12kB to hadoop-master:/root/
 ```
+```bash
+# se connecter au terminal du container si jamais on l'avait quitté
+docker exec -it hadoop-master /bin/bash
+```
+
+## 8. Exécuter un job de comptage de mots
+
+```bash
+hadoop jar ./WordCount.jar WordCount input output
+```
+```
+
+```
