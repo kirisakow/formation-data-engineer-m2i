@@ -177,7 +177,7 @@ Successfully copied 5.12kB to hadoop-master:/root/
 docker exec -it hadoop-master /bin/bash
 ```
 
-## 9. Exécuter un job de comptage de mots
+## 9. Exécuter un job Hadoop de comptage de mots
 
 ```bash
 hadoop jar ./WordCount.jar WordCount input output
@@ -215,4 +215,38 @@ L       8
 plus    7
 pas     6
 dans    6
+```
+
+## 10. Effectuer le comptage de mots équivalent avec Spark
+
+1. Lancer Spark avec la commande `spark-shell`
+
+2. Exécuter les commandes suivantes
+
+```scala
+val lines = sc.textFile("input/exemple.txt")
+
+val words = lines.flatMap(line => line.split("\\s+"))
+
+val counts = words.map(word => (word, 1)).reduceByKey(_ + _).sortBy(_._2, ascending = false).map{ case (word, count) => s"$word $count" }
+
+counts.saveAsTextFile("output/exemple_result")
+```
+3. Quitter Spark avec la commande `:quit` ou le raccourci <kbd>ctrl</kbd><kbd>d</kbd>
+
+4. Pour voir un aperçu des résultats :
+```bash
+hadoop fs -cat output/exemple_result/part* | head
+```
+```
+de   54
+à    54
+des  35
+un   27
+les  22
+la   21
+Des  21
+d    18
+Un   17
+ne   17
 ```
