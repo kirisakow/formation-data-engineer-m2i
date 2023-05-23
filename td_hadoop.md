@@ -182,8 +182,37 @@ docker exec -it hadoop-master /bin/bash
 ```bash
 hadoop jar ./WordCount.jar WordCount input output
 ```
-
 Pour voir un aperçu des résultats :
 ```bash
 hadoop fs -cat output/part* | head
+```
+```
+11      1
+2004    1
+3000    1
+Adjani  1
+Arvor   1
+Au      2
+Beaucoup        3
+Bedos   1
+Bellucci        1
+Bernie  1
+```
+Pour un aperçu trié :
+```bash
+#   -r, --reverse             reverse the result of comparisons
+#   -k, --key=KEYDEF          sort via a key; KEYDEF gives location and type
+hadoop fs -cat output/part* | sort -r -k 2 | head
+```
+```
+une     9
+en      9
+ces     9
+au      9
+Tu      9
+Une     8
+L       8
+plus    7
+pas     6
+dans    6
 ```
