@@ -1,6 +1,6 @@
 ## Exercices et TP de la formation Data Engineer chez M2i à Villeneuve-d'Ascq (2023/03—2023/08)
 
-Contenu de la formation : https://webcache.googleusercontent.com/search?q=cache:BkOpow58BqwJ:https://www.m2iformation.fr/1-formation-1-job/formation/data-engineer/433/pdf/
+Contenu de la formation : https://github.com/kirisakow/formation-data-engineer-m2i/blob/main/programme.formation.data.engineer.2023.03.27-2023.09.01.pdf
 
 ### Modules
 
