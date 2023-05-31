@@ -2,8 +2,7 @@
 
 ## Préambule
 
-Le jeu de données pour l'exercice est le suivant :
-``https://www.kaggle.com/etiennelq/french-employment-by-town``
+Le jeu de données pour l'exercice est le suivant : https://www.kaggle.com/etiennelq/french-employment-by-town
 
 Ce jeu de données comprend :
 
@@ -11,6 +10,13 @@ Ce jeu de données comprend :
 - 2 fichiers GeoJSON
 
 Le descriptif de chaque fichier est inclus dans le lien Kaggle ci-dessus.
+
+## Les 3 fichiers à utiliser dans l'exercice sont :
+
+- base_etablissement_par_tranche_effectif.csv
+- population.csv
+- name_geographic_information_modified.csv
+- net_salary_per_town_categories.csv
 
 ## Questions
 
@@ -21,14 +27,6 @@ Le descriptif de chaque fichier est inclus dans le lien Kaggle ci-dessus.
 5. Trouver le top 3 des communes ayant le salaire moyen le plus élevé, parmi les communes de plus de 100 000 habitants.
 6. Trouver le top 3 des communes ayant le salaire moyen le plus bas, parmi les communes de plus de 100 000 habitants.
 7. Trouver le top 3 des regions ayant le plus de communes.
-
-## NB
-
-Les 3 fichiers à utiliser dans l'exercice sont :
-
-- base_etablissement_par_tranche_effectif.csv
-- population.csv
-- name_geographic_information_modified.csv
 
 ### Content
 
