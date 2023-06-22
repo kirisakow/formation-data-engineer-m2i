@@ -1,0 +1,4 @@
+sudo docker build --tag h20_adiera .
+
+
+sudo docker run -dit --name h20_adiera -p 54321:54321 h20_adiera

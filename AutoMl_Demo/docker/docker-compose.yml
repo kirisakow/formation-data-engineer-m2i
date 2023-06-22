@@ -1,0 +1,44 @@
+version: "3.1"
+
+services:
+  h2o:
+    build:
+      context: ./H2O
+      dockerfile: Dockerfile
+    image: dev/h2o
+    hostname: h2o-scheduler
+    ports:
+      - "54321:54321"
+      - "54322:54322"
+    #command: ["sleep","60"]
+    volumes:
+      - /home/ikerlan/notebooks:/notebooks
+      - /home/ikerlan/data:/data
+    entrypoint:
+      - java
+      - -Xmx8g
+      - -jar
+      - h2o-3.26.0.1/h2o.jar
+    networks:
+      - monitoring
+
+
+  jupyter:
+    build:
+      context: ./jupyter
+      dockerfile: Dockerfile
+    image: dev/jupyter
+    hostname: jupyter
+    volumes:
+        - ./../notebooks:/notebooks 
+        - ./../data:/data
+    ports:
+      - "1997:8888"
+    environment:
+    #  - DASK_SCHEDULER_ADDRESS="tcp://h2o-scheduler:54321"
+      - SHM_SIZE=12gb
+    networks:
+      - monitoring
+
+networks:
+    monitoring:

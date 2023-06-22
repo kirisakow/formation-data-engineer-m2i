@@ -1,0 +1,2 @@
+sudo docker run -dit --pid=host --shm-size=12gb --name jupyter_adiera -v /home/ikerlan/notebooks:/notebooks -v /home/ikerlan/data:/data -p 1997:8888 jupyter_adiera
+
