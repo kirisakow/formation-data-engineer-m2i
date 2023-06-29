@@ -17,7 +17,7 @@ def test_fizzbuzz():
         fizzbuzz_from_1_to_100_actual)
 
 
-class test_fizzbuzz(unittest.TestCase):
+class TestFizzBuzz(unittest.TestCase):
     def test_fizzbuzz(self):
         self.assertEqual(fizzbuzz.fizzbuzz(9), 'Fizz')
         self.assertEqual(fizzbuzz.fizzbuzz(10), 'Buzz')

@@ -28,7 +28,7 @@ def test_thermometer4():
     assert thermometer.get_temp_closest_to_0([-19, 9, 5, -5, -1]) == -1
 
 
-class test_thermometer(unittest.TestCase):
+class TestThermometer(unittest.TestCase):
     def test_thermometer(self):
         self.assertEqual(thermometer.get_temp_closest_to_0([]), 0)
 
