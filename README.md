@@ -19,3 +19,4 @@ Contenu de la formation : https://github.com/kirisakow/formation-data-engineer-m
 | 2023/06/12 — 2023/06/15 | Qlik Sense | [Romain VASSEUR](https://www.linkedin.com/in/romain-vasseur-baa89898/) |
 | [2023/06/20](https://github.com/kirisakow/formation-data-engineer-m2i/tree/2023.06.20.web.scraping/td.web.scraping) | TD Web scraping avec BeautifulSoup | [Romain VASSEUR](https://www.linkedin.com/in/romain-vasseur-baa89898/) |
 | [2023/06/21](https://github.com/kirisakow/formation-data-engineer-m2i/tree/2023.06.21.ml.autogluon/AutoMl_Demo) | TD AutoML avec AutoGluon | [Romain VASSEUR](https://www.linkedin.com/in/romain-vasseur-baa89898/) |
+| [2023/06/28 — 2023/06/30](https://github.com/kirisakow/formation-data-engineer-m2i/tree/2023.06.28.tdd.bonnes.pratiques) | TDD et bonnes pratiques | [Pierre GAILLARD](https://fr.linkedin.com/in/pierre--gaillard) |
