@@ -14,7 +14,7 @@ Petit exemple d'application Web containerisée / dockerisée C.R.U.D. de gestion
       - RETRIEVE: afficher tous utilisateurs (avec une requête comme `GET http://.../users`), afficher un utilisateur identifié par son ID (avec une requête comme `GET http://.../user/42`) ;
       - UPDATE: mettre à jour un utilisateur (avec une requête comme `PUT http://.../update_user/42`) ;
       - DELETE: supprimer un utilisateur (avec une requête comme `DELETE http://.../delete_user/42`).
-- [ ] Porter la couche persistance en MongoDB.
+- [x] Porter la couche persistance en MongoDB.
 - [ ] Dockeriser l'application en créant un fichier `Dockerfile`.
 - [ ] Créer une composition de containers avec un fichier `docker-compose.yml`. Consignes :
     - trois services : l'application Flask, la base de données MongoDB, l'IHM MongoExpress ;
