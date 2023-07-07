@@ -1,14 +1,27 @@
-from flask import Flask, jsonify, request
+import os
+from flask import Flask, jsonify, request, Response
+from pymongo import MongoClient
+from dotenv import load_dotenv
 
+load_dotenv()
+
+mongodb_hostname = os.environ.get('MONGO_HOST', '')
+mongodb_port = 27017
+db_name = os.environ.get('DB_NAME', '')
 app = Flask('my_flask_app')
+mongo_client = MongoClient(mongodb_hostname, mongodb_port, username='root', password='root')
+db = mongo_client[db_name]
+users = db.users
 
-users = [
-    {'id': 1, 'name': 'John Doe le papy', 'email': 'papy@doe.me'},
-    {'id': 2, 'name': 'John Doe le daron', 'email': 'daron@doe.me'},
-    {'id': 3, 'name': 'John Doe le jeune', 'email': 'jeune@doe.me'},
-    {'id': 4, 'name': 'Jane Doe la mamie', 'email': 'mamie@doe.me'},
-    {'id': 5, 'name': 'Jane Doe la daronne', 'email': 'daronne@doe.me'}
-]
+to_dict = lambda obj: {k: v for k, v in obj.items() if k in ['id', 'name', 'email']}
+
+# users = [
+#     {'id': 1, 'name': 'John Doe le papy', 'email': 'papy@doe.me'},
+#     {'id': 2, 'name': 'John Doe le daron', 'email': 'daron@doe.me'},
+#     {'id': 3, 'name': 'John Doe le jeune', 'email': 'jeune@doe.me'},
+#     {'id': 4, 'name': 'Jane Doe la mamie', 'email': 'mamie@doe.me'},
+#     {'id': 5, 'name': 'Jane Doe la daronne', 'email': 'daronne@doe.me'}
+# ]
 
 
 @app.route('/create_user', methods=['POST'])
@@ -18,12 +31,12 @@ def create_user():
     if data is None:
         return jsonify({'message': 'Cannot create a user: no data'}), 404
     user = {
-        'id': len(users) + 1,
+        'id': users.find_one(sort=[('id', -1)])['id'] + 1,
         'name': data['name'],
         'email': data['email']
     }
-    users.append(user)
-    return jsonify(users), 201
+    users.insert_one(user)
+    return jsonify([to_dict(u) for u in users.find()]), 201
 
 
 @app.route('/', methods=['GET'])
@@ -31,40 +44,40 @@ def create_user():
 @app.route('/users/', methods=['GET'])
 @app.route('/user', methods=['GET'])
 @app.route('/user/', methods=['GET'])
-def get_users():
-    return jsonify(users)
+def get_all_users():
+    return jsonify([to_dict(u) for u in users.find()]), 200
 
 
-@app.route('/user/<int:user_id>', methods=['GET'])
-@app.route('/user/<int:user_id>/', methods=['GET'])
-def get_user(user_id: int):
-    user = next((user for user in users if user['id'] == user_id), None)
-    if user is None:
-        return jsonify({'message': 'User not found'}), 404
-    return jsonify(user)
+@app.route('/user/<int:id>', methods=['GET'])
+@app.route('/user/<int:id>/', methods=['GET'])
+def get_user_by_id(id: int):
+    if (user := users.find_one({'id': id})) is not None:
+        return jsonify(to_dict(user)), 200
+    return jsonify({'message': 'User not found'})
 
 
-@app.route('/update_user/<int:user_id>', methods=['PUT'])
-@app.route('/update_user/<int:user_id>/', methods=['PUT'])
-def update_user(user_id: int):
-    for i, user in enumerate(users):
-        if user['id'] == user_id:
-            data = request.get_json()
-            if data is None:
-                return jsonify({'message': 'Cannot update a user: no data'}), 404
-            user['name'] = data['name']
-            user['email'] = data['email']
-            users.pop(i)
-            users.insert(i, user)
-            return jsonify(users)
+@app.route('/update_user/<int:id>', methods=['PUT'])
+@app.route('/update_user/<int:id>/', methods=['PUT'])
+def update_user(id: int):
+    data = request.get_json()
+    if data is None:
+        return jsonify({'message': 'Cannot update a user: no data'}), 404
+    user = {
+        'id': data['id'],
+        'name': data['name'],
+        'email': data['email']
+    }
+    users.replace_one({'id': id}, user)
+    return jsonify([to_dict(u) for u in users.find()]), 200
 
 
-@app.route('/delete_user/<int:user_id>', methods=['DELETE'])
-@app.route('/delete_user/<int:user_id>/', methods=['DELETE'])
-def delete_user(user_id: int):
-    global users
-    users = [user for user in users if user['id'] != user_id]
-    return jsonify(users)
+@app.route('/delete_user/<int:id>', methods=['DELETE'])
+@app.route('/delete_user/<int:id>/', methods=['DELETE'])
+def delete_user(id: int):
+    if users.find_one({'id': id}) is not None:
+        users.delete_one({'id': id})
+        return jsonify([to_dict(u) for u in users.find()]), 200
+    return jsonify({'message': 'User not found'})
 
 
 if __name__ == '__main__':
