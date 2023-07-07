@@ -1,9 +1,6 @@
 import os
 from flask import Flask, jsonify, request, Response
 from pymongo import MongoClient
-from dotenv import load_dotenv
-
-load_dotenv()
 
 mongodb_port = 27017
 app = Flask('my_flask_app')
