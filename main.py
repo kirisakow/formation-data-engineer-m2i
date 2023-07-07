@@ -5,12 +5,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-mongodb_hostname = os.environ.get('MONGO_HOST', '')
 mongodb_port = 27017
-db_name = os.environ.get('DB_NAME', '')
 app = Flask('my_flask_app')
-mongo_client = MongoClient(mongodb_hostname, mongodb_port, username='root', password='root')
-db = mongo_client[db_name]
+mongo_client = MongoClient(
+    os.environ.get('MONGO_HOST', ''),
+    mongodb_port,
+    username=os.environ.get('DB_ROOT_USERNAME', ''),
+    password=os.environ.get('DB_ROOT_PASSWORD', '')
+)
+db = mongo_client[os.environ.get('DB_NAME', '')]
 users = db.users
 
 to_dict = lambda obj: {k: v for k, v in obj.items() if k in ['id', 'name', 'email']}

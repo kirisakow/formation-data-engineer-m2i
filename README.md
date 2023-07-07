@@ -15,8 +15,8 @@ Petit exemple d'application Web containerisée / dockerisée C.R.U.D. de gestion
       - UPDATE: mettre à jour un utilisateur (avec une requête comme `PUT http://.../update_user/42`) ;
       - DELETE: supprimer un utilisateur (avec une requête comme `DELETE http://.../delete_user/42`).
 - [x] Porter la couche persistance en MongoDB.
-- [ ] Dockeriser l'application en créant un fichier `Dockerfile`.
-- [ ] Créer une composition de containers avec un fichier `docker-compose.yml`. Consignes :
-    - trois services : l'application Flask, la base de données MongoDB, l'IHM MongoExpress ;
-    - la base de données doit être montée en tant que volume, si bien qu'elle doit continuer d'exister après la destruction des containers qui l'utilisent ;
-    - les données confidentielles telles que les mots de passes ne doivent pas figurer dans le fichier `docker-compose.yml` mais doivent être stockées dans un fichier `.env` exclus du dépôt GitHub.
+- [x] Dockeriser l'application en créant un fichier `Dockerfile`.
+- [x] Créer une composition de containers avec un fichier `docker-compose.yml`. Consignes :
+    - [x] trois services : l'application Flask, la base de données MongoDB, l'IHM MongoExpress ;
+    - [x] la base de données doit être montée en tant que volume, si bien qu'elle doit continuer d'exister après la destruction des containers qui l'utilisent ;
+    - [x] les données confidentielles telles que les mots de passes ne doivent pas figurer dans le fichier `docker-compose.yml` mais doivent être stockées dans un fichier `.env` exclus du dépôt GitHub.

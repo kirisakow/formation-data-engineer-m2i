@@ -41,5 +41,7 @@ services:
     environment:
       MONGO_HOST: myflaskapp-mongodb
       DB_NAME: my_flask_app_db
+      DB_ROOT_USERNAME: ${DB_ROOT_USERNAME}
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
       - default
