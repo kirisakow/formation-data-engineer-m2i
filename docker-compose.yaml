@@ -101,6 +101,14 @@ services:
       start_period: 5s
     restart: always
 
+  adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 7080:8080
+      depends_on:
+        - postgres
+
   redis:
     image: redis:latest
     expose:
