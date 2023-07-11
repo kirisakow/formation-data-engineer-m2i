@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta
 from textwrap import dedent
-from airflow.decorators import dag
+from airflow.decorators import dag, task
 from airflow.operators.bash import BashOperator
+
 
 @dag(
     "tutorial_annotation",
@@ -64,6 +65,12 @@ def tutorial_dag():
         bash_command=templated_command,
     )
 
-    t1 >> [t2, t3]
+    @task(task_id="templated_command_as_a_python_func")
+    def t4():
+        for i in range(5):
+            print(datetime.now())
+            print(datetime.now() + timedelta(days=7))
+
+    t1 >> [t2, t3, t4()]
 
 tutorial_dag()
