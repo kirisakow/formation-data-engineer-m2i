@@ -2,5 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: express-configmap
+  namespace: my-namespace
 data:
-  database_url: mongodb-service
+  database_url: mongodb-service.my-namespace
