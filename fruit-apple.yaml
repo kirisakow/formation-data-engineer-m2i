@@ -1,0 +1,29 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: apple-app
+  labels:
+    app: apple
+spec:
+  containers:
+    - name: apple-app
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      image: hashicorp/http-echo
+      args:
+        - "-text=apple"
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: apple-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: apple
+  ports:
+    - port: 5678 # Default port for image

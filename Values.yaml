@@ -1,0 +1,6 @@
+name: my-app
+shortname: my-app
+container:
+  name: my-container
+  image: my-image
+  containerPort: 42

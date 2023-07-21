@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: nginx-service
 spec:
+  type: LoadBalancer
   selector:
     app: nginx
   ports:
-  - port: 8080
+  - port: 44444
     targetPort: 8080
     protocol: TCP

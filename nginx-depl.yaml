@@ -23,3 +23,10 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        volumeMounts:
+          - name:  mypv
+            mountPath: "/usr/share/nginx/html"
+      volumes:
+      - name:  mypv
+        persistentVolumeClaim:
+          claimName: mypvc
