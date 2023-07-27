@@ -52,7 +52,8 @@ if __name__ == '__main__':
                     tmp.append(empty_str_placeholder)
                 else:
                     tmp.append(clean_html_content(v.text))
-            content_to_save.append(tmp)
+            if tmp not in content_to_save:
+                content_to_save.append(tmp)
         with open(csv_filename, 'a') as f:
             writer = csv.writer(f)
             writer.writerows(content_to_save)

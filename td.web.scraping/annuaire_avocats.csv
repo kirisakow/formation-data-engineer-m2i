@@ -2,7 +2,6 @@ nom_prenom,adresse,email,telephone
 ABASSIT Florian,"31, avenue Jean Médecin 06000 Nice",avocat@florian-abassit.com,06 50 86 91 62
 ABBATI Anaïs,"13, rue Alphonse Karr Le Louvre 06004",anais.abbati@alister-avocats.eu,04 97 03 11 50
 ABDALLAOUI Myriam,8 rue Alfred Mortier 06000 Nice,myriam-abdallaoui@hotmail.com,04 93 80 63 01
-ABDALLAOUI Myriam,8 rue Alfred Mortier 06000 Nice,myriam-abdallaoui@hotmail.com,04 93 80 63 01
 ABDOULAYE MOUSSA Abdoul Wahab,"16, boulevard Raimbaldi 06000 Nice",abdoul.abdoulayemoussa@gmail.com,06 51 83 90 86
 ABECASSIS Charles,"1, Place Magenta 06000 Nice",ch.abk6@wanadoo.fr,04 93 88 30 17
 ABID Samih,"35, rue Gioffredo 06000 Nice",contact@abid-avocats.com,04 93 87 71 06
@@ -61,7 +60,7 @@ ATTIA-ZEITOUN Sharon,40 bd Victor Hugo 06000 Nice,contact@saz-avocat.com,06 58 3
 AUDEBERT David,"57, Promenade des Anglais 06000 Nice",david.audebert@lachkar.fr,04 83 43 26 26
 AUDOLI Amandine,"41, bd Carabacel 06000 Nice",amandineaudoli.avocat@outlook.fr,04 93 80 38 26
 AUDOLI Florent,"31, rue de la Buffa 06000 Nice",avocat@florentaudoli.com,04 93 07 82 24
-AUNE Anne-Claire,"2, rue de Massingy Palais Massingy 06000 Nice",ac@aune-avocat-nice.com,04 93 012 012
+AUNE-BRANCALEONI Anne-Claire,"2, rue de Massingy Palais Massingy 06000 Nice",ac@aune-avocat-nice.com,04 93 012 012
 AURICOSTE Laurent,46 Boulevard Victor Hugo BP 1443 06008,l.auricoste@unijuris.fr,04 93 87 12 66
 AUTHAMAYOU Marc,"17, rue Alexandre Mari 06300 Nice",authamayou.avocat@free.fr,09 73 53 35 84
 AUVOLAT Catherine,"26, rue Berlioz 06000 Nice",cauvolat.avocat@gmail.com,06 59 19 67 92
@@ -140,7 +139,7 @@ BIENFAIT Eric,55 Rue Gioffredo 06000 Nice,bienfait.e@wanadoo.fr,04 93 80 88 02
 BILLECOQ Julien,"8, avenue Notre Dame 06000 Nice",julien.billecoq@orange.fr,07 70 05 30 46
 BINDER Coralie,10 rue Foncet 06000 Nice,cb@binder-avocat.com,06 22 61 39 02
 BINIMELIS Maeva,"50, avenue Borriglione 06100 Nice",maeva.binimelis.avocat@gmail.com,06 83 57 03 43
-BIOT-STUART Carole,"1, avenue du Patrimoine 06100 Nice",cbiotstuart.avocat@gmail.com,04 84 35 05 07
+BIOT-STUART Carole,"22, raccourci de la Croix de Berra Horizon 220 06200 Nice",cbiotstuart.avocat@gmail.com,04 84 35 05 07
 BISMUTH Marie,"76, bd Napoléon III 06200 Nice",marie.bismuth@gmail.com,04 93 18 87 04
 BLOUIN Jimmy,"17, rue de l'Hôtel des Postes 06000 Nice",jblouin.avocat@gmail.com,04 89 24 43 40
 BLUA Nathalie,"20, Avenue Notre Dame 06000 Nice",avocat.blua@gmail.com,04 93 62 22 26
@@ -175,7 +174,7 @@ BOURGUET MAURICE Frédéric,"20, bd Dubouchage 06000 Nice",frederic.bourguet-mau
 BOUSTANI Bettina,"4, rue des Ponchettes 06000 Nice",bettina2.boustani@gmail.com,04 93 85 79 44
 BOUTERAA Meïssa,"52, rue Gioffredo 06000 Nice",bouteraa.meissa@avocat-conseil.fr,04 93 85 40 62
 BOUTIN Magali,"11, rue de Rivoli 06000 Nice",mboutin@barthelemy-avocats.com,04 93 80 80 80
-BOUZERGAN Yasmine,"36, rue Tonduti de l'Escarène 06000 Nice",bouzergan.avocat@gmail.com,07 83 71 36 59
+BOUZERGAN Yasmine,"36, rue Tonduti de l'Escarène 06000 Nice",ybouzergan@mcavocats.com,07 83 71 36 59
 BOUZIDI Sophia,"36, rue Tonduti de l'Escarène 06000 Nice",sbouzidi@mcavocats.com,09 66 84 22 39
 BOUZOU Zoubaïda,"102, bd de Cimiez 06000 Nice",isegoria.conseils@gmail.com,04 93 53 65 89
 BOVIS Alix Anne,"147, Boulevard Gambetta 06000 Nice",alixannebovisavocat@gmail.com,09 71 25 75 84
@@ -196,6 +195,7 @@ BRISSI Laurent,"4, ruelle des Prés Le Triangle d'Or 06000 Nice",brissi.avocat@g
 BROCA Gilles,"9, rue Alfred Mortier 06000 Nice",nice.avocat@gmail.com,07 82 06 58 74
 BROGINI Benoît,"5, Boulevard Victor Hugo 06000 Nice",bbr@neveu-charles-avocats.com,04 93 87 30 30
 BRUGIERE Yves,"1, Place Randon 06000 Nice",ybrugiere@aol.com,04 93 82 11 86
+BRUGUIER Marianne,"11, rue Chauvain 06000 Nice",m.bruguier@cabinetperreau.com,01 83 20 40 00
 BRUN Audrey,"37, rue Pastorelli 06000 Nice",avocat@cabinet-ab.fr,06 73 43 88 94
 BRUN Charles-Pierre,27 rue Verdi 06000 Nice,charles@brun-avocat.com,07 81 68 75 05
 BRUN-PECCIARINI Annie,10 Rue Arson Les Mouettes 06300 Nice,Introuvable,04 93 55 77 75
@@ -214,7 +214,7 @@ CAMINITI-ROLLAND Sarah,"14, Chemin du Castellaret 06240 Beausoleil",sarahrolland
 CAMPANI Audrey,"1, rue Partouneaux Le Majestic 06500 Menton",audreycampani@hotmail.fr,04 93 17 34 97
 CAMPESTRINI Jérôme,"3, rue Gubernatis 06000 Nice",jeromecampestrini@gmail.com,04 93 88 74 41
 CAMPS Philippe,"8, rue Alfred Mortier 06000 Nice",ph.camps@yahoo.fr,04 93 01 05 52
-CAMUS Kim,"16, rue Gioffredo 06000 Nice",kim.camus@avocat-contact.com,04 92 00 9 91
+CAMUS Kim,"38, rue Paul Déroulède 06000 Nice",kim.camus@avocat-contact.com,06 67 32 03 65
 CANDAU Frederi,"22, rue Tonduti de l'Escarène 06000 Nice",candau.avocat@gmail.com,04 93 13 96 31
 CANFIN Thomas,"27, bd Dubouchage L'Artistique 06000 Nice",tc@avocatsetassocies.fr,04 93 85 08 89
 CANNAUX Lucile,"30, rue Rossini 06000 Nice",cannaux.avocat@gmail.com,04 93 16 36 90
@@ -371,11 +371,10 @@ DEBRUGE-ESCOBAR Jean-Philippe,12 avenue Maréchal Foch 06000 Nice,j.ph.debruge@g
 DEFERI Marilyne,"33, avenue Jean Médecin 06000 Nice",deferi.marilyne@gmail.com,06 12 39 57 57
 DEFORGES Marie,"1, Place du Palais 06300 Nice",deforges.avocat@gmail.com,04 92 47 75 75
 DEL RIO Denis,6 Rue Bottero 06000 Nice,denis@cabinetdelrio.fr,04 92 07 55 77
-DEL RIO Emmanuelle,"6, rue Bottero 06000",emmanuelle@cabinetdelrio.fr,04 92 07 55 77
 DELAHOUSSE Lucile,455 Promenade Des Anglais Le Phare 06299 Nice,Introuvable,04 93 72 70 30
 DELCROIX Camille,"9, rue Foncet 06000 Nice",camille.delcroix.avocat@gmail.com,04 93 88 57 55
 DELLA MONACA Cécile,15 rue assalit 06000 Nice,cdm@oloumi-avocats.com,04 97 00 02 35
-DELLA SUDDA Perrine,"5, rue de la Préfecture 06300 Nice",dellasudda.avocat@hotmail.com,06 76 64 27 70
+DELLA SUDDA Perrine,31 bis avenue Maréchal Foch 06000 Nice,dellasudda.avocat@hotmail.com,06 76 64 27 70
 DELMASSE-SIMONI Claire,"8 bis, rue Andrioli 06000 Nice",avocat.delmasse@gmail.com,04 93 97 38 39
 DELOBEL Corentin,"6, rue Gounod 06000 Nice",delobel.avocat@gmail.com,04 93 85 33 74
 DELPUGET Anouck,"28, bd Raimbaldi 06000 Nice",avocat@cabinetdelpuget.fr,04 93 79 45 20
@@ -402,7 +401,6 @@ DIEUDONNE Pascale,47 Boulevard Victor Hugo 06000 Nice,dieudonnepascale@yahoo.fr,
 DIMITROV Laurie,"27, rue de France 06000 Nice",laurie.dimitrov@lda.law,06 24 99 36 40
 DINI Pierre,"11, rue de la Préfecture 06300 Nice",pierredini.avocat@gmail.com,04 93 62 24 63
 DIODORO Yann,"7, rue Guiglia 06000 Nice",ym.diodoro@gmail.com,04 93 13 30 00
-DIOP Christine,3 Rue Jean Bono 06320 Cap d'ail,christine.diop@wanadoo.fr,04 93 41 93 45
 DIRE Camille,"50, avenue Jean Médecin 06000 Nice",contact@dire-avocat.eu,06 29 65 13 17
 DODEMAND Victor,"455, Promenade des Anglais Les Portes de l'Arénas Entrée B 06200 Nice",victor.dodemand@fidal.com,04 93 16 27 95
 DOGO-BERY Harou,"45, avenue Jean Médecin 06000 Nice",dogobery.avocat@yahoo.fr,04 93 86 20 52
@@ -489,7 +487,7 @@ FLORENTINY Marie-France,4 Avenue Félix Faure 06000 Nice,Introuvable,04 93 13 83
 FLORI Jean-Denis,"13, rue du Congrès 06000 Nice",jeandenis.fiori@gmail.com,06 82 90 44 38
 FOATA Valérie,57 Promenade Des Anglais Villa La Plage 06000 Nice,v.foata@bfp-avocats.com,04 93 37 03 75
 FONDERE Jean-Fran‡ois,57 Promenade Des Anglais 06000 Nice,jf.fondere@bfp-avocats.com,04 93 37 03 75
-FONKOUE Edith,"1, avenue du Patrimoine 06100 Menton",edith_fonkoue@yahoo.fr,06 36 14 73 29
+FONKOUE Edith,"1, avenue du Patrimoine 06100 Nice",edith_fonkoue@yahoo.fr,06 36 14 73 29
 FONTANEAU Pierre-Marie,"51, avenue Reine Victoria 06000 Nice",avocats@fontaneau.com,04 93 53 89 00
 FONTEIX Cloé,"13, rue Masséna 06000 Nice",cf@fonteix-avocat.com,04 93 01 36 20
 FORTABAT Adeline,"1, rue du Lucée 06000 Nice",a.fortabat.avocat@gmail.com,04 93 62 75 32
@@ -547,7 +545,7 @@ GERBI Laurent,"8, Avenue Notre Dame 06000 Nice",laurentgerbi@gerbiavocats.com,04
 GERBI Patrick,8 Avenue Notre Dame 06000 Nice,patrickgerbi@gerbiavocats.com,04 93 80 35 71
 GERMANETTO Laetitia,"17, rue Alexandre Mari 06300 Nice",laetitia.germanetto@hotmail.fr,04 93 62 06 06
 GHANEM Noura,SELARL VENTURY AVOCATS 1bis avenue Durante 06000 Nice,ghanem.avocat@gmail.com,04 93 16 27 95
-GHERARDI Bruno,"17, rue de l'hôtel des Postes 06000 Nice",bghererdi@sollberger.fr,04 89 24 43 40
+GHERARDI Bruno,455 Promenade des Anglais Immeuble Le Phare 06200 Nice,bruno@gherardi-avocat.com,06 47 88 25 40
 GHERSON Elise,"13, rue Masséna 06000 Nice",Gherson_elise@hotmail.com,04 89 24 44 07
 GIACOBBI Jacqueline,"2, Rue Lépante 06000 Nice",giacobbi.jacqueline@wanadoo.fr,04 93 92 60 57
 GIANQUINTO Stéphane,2 Rue Gubernatis 06000 Nice,maitre-gianquinto@wanadoo.fr,04 93 13 49 44
@@ -599,3 +597,4 @@ GUERINOT Romain,"2, place Jean Moulin 06000 Nice",guerinot@rgmp-avocats.com,04 2
 GUERRA Guillaume,6 rue Alphonse Karr Le Palace entrée C/D 06000 Nice,guerra-avocat@outlook.fr,04 89 00 44 69
 GUERRINI Edouard,"13, rue Alphonse Karr 06000 Nice",edouard@guerrini-avocat.fr,04 97 03 11 50
 GUETTA Paul,44 Boulevard Victor Hugo 06000 Nice,paul-guetta.avocat@wanadoo.fr,04 93 16 05 04
+GUEZ GUEZ Sefien,"8, rue Alfred Mortier 06000 Nice",contact@cabinet-guezguez.com,04 89 24 41 53
