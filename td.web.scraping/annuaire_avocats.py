@@ -27,6 +27,16 @@ def clean_html_content(s: str):
     return s
 
 
+def clean_csv_file(csv_filename: str) -> None:
+    """Fixes Windows-related encoding problems (CP1252 -> UTF8)
+    and deletes empty lines in the CSV file"""
+    with open(csv_filename, 'r', encoding='cp1252') as f_to_read:
+        lines_to_keep = [line for line in f_to_read.readlines()
+                         if line != '\n']
+        with open(csv_filename, 'w', encoding='utf8') as f_to_write:
+            f_to_write.writelines(lines_to_keep)
+
+
 if __name__ == '__main__':
     empty_str_placeholder = 'Introuvable'
     url_base = 'https://www.barreaudenice.com'
@@ -59,8 +69,4 @@ if __name__ == '__main__':
             writer.writerows(content_to_save)
             content_to_save = []
 
-    with open(csv_filename, 'r', encoding='cp1252') as f_to_read:
-        lines_to_keep = [line for line in f_to_read.readlines()
-                         if line != '\n']
-        with open(csv_filename, 'w', encoding='utf8') as f_to_write:
-            f_to_write.writelines(lines_to_keep)
+    clean_csv_file(csv_filename)
