@@ -48,8 +48,10 @@ if __name__ == '__main__':
             telephone = info_avocat.find('span', class_='telephone')
             tmp = []
             for v in [nom_prénom, adresse, email, telephone]:
-                tmp.append(empty_str_placeholder) if v is None else tmp.append(
-                    clean_html_content(v.text))
+                if v is None:
+                    tmp.append(empty_str_placeholder)
+                else:
+                    tmp.append(clean_html_content(v.text))
             content_to_save.append(tmp)
         with open(csv_filename, 'a') as f:
             writer = csv.writer(f)
