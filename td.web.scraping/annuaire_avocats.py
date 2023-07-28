@@ -11,11 +11,13 @@
 # voici le lien de la première page --> https://www.barreaudenice.com/annuaire/avocats/?fwp_paged=1
 
 
-import requests
+import asyncio
+import aiohttp
 from bs4 import BeautifulSoup
 import csv
 import re
-from tqdm import tqdm, trange
+from tqdm.asyncio import tqdm_asyncio
+from time import time
 
 
 def clean_html_content(s: str):
@@ -37,40 +39,72 @@ def clean_csv_file(csv_filename: str) -> None:
             f_to_write.writelines(lines_to_keep)
 
 
-if __name__ == '__main__':
+async def async_scrape_page(url: str):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.text()
+
+
+async def async_parse_html_content(html_content: str):
     EMPTY_DATA_PLACEHOLDER = 'Introuvable'
+    page_data = []
+    soup = BeautifulSoup(html_content, 'html.parser')
+    for info_avocat in soup.find_all('div', class_='annuaire-single'):
+        nom_prénom = info_avocat.find('h3')
+        adresse = info_avocat.find('span', class_='adresse')
+        email = info_avocat.find('span', class_='email')
+        telephone = info_avocat.find('span', class_='telephone')
+        individual_contact_data = []
+        for html_content in [nom_prénom, adresse, email, telephone]:
+            if html_content is None:
+                individual_contact_data.append(EMPTY_DATA_PLACEHOLDER)
+            else:
+                clean_html = clean_html_content(html_content.text)
+                individual_contact_data.append(clean_html)
+        if individual_contact_data not in page_data:
+            page_data.append(individual_contact_data)
+    return page_data
+
+
+async def async_save_to_csv(csv_filename: str, page_data: list):
+    with open(csv_filename, 'a', newline='\n') as f:
+        writer = csv.writer(f)
+        writer.writerows(page_data)
+
+
+async def async_main():
+    """Main coroutine"""
     URL_BASE = 'https://www.barreaudenice.com'
     URL_PATH = '/annuaire/avocats/?fwp_paged={0}'
     HOW_MANY_PAGES = 50
     CSV_FILENAME = 'annuaire_avocats.csv'
+    HEADER = ['nom_prenom', 'adresse', 'email', 'telephone']
 
-    with open(CSV_FILENAME, 'w', encoding='utf8') as f_to_write:
-        f_to_write.write('')
+    with open(CSV_FILENAME, 'w') as f_to_write:
+        header_row = ','.join(HEADER)
+        f_to_write.write(header_row + '\n')
 
-    header = ['nom_prenom', 'adresse', 'email', 'telephone']
-    page_data = [header]
-    for fwp_page in trange(1, HOW_MANY_PAGES + 1):
+    scraping_tasks = []
+    for fwp_page in range(1, HOW_MANY_PAGES + 1):
         url_path = URL_PATH.format(fwp_page)
-        html_content = requests.get(URL_BASE + url_path).text
-        soup = BeautifulSoup(html_content, 'html.parser')
-        for info_avocat in tqdm(soup.find_all('div', class_='annuaire-single'),
-                                leave=False):
-            nom_prénom = info_avocat.find('h3')
-            adresse = info_avocat.find('span', class_='adresse')
-            email = info_avocat.find('span', class_='email')
-            telephone = info_avocat.find('span', class_='telephone')
-            individual_contact_data = []
-            for html_content in [nom_prénom, adresse, email, telephone]:
-                if html_content is None:
-                    individual_contact_data.append(EMPTY_DATA_PLACEHOLDER)
-                else:
-                    clean_html = clean_html_content(html_content.text)
-                    individual_contact_data.append(clean_html)
-            if individual_contact_data not in page_data:
-                page_data.append(individual_contact_data)
-        with open(CSV_FILENAME, 'a') as f:
-            writer = csv.writer(f)
-            writer.writerows(page_data)
-            page_data = []
+        scraping_tasks.append(async_scrape_page(URL_BASE + url_path))
+    html_content_list = await tqdm_asyncio.gather(*scraping_tasks)
+
+    parsing_tasks = []
+    for html_content in html_content_list:
+        parsing_tasks.append(async_parse_html_content(html_content))
+    page_data_list = await tqdm_asyncio.gather(*parsing_tasks)
+
+    save_to_csv_tasks = []
+    for page_data in page_data_list:
+        save_to_csv_tasks.append(async_save_to_csv(CSV_FILENAME, page_data))
+    await tqdm_asyncio.gather(*save_to_csv_tasks)
 
     clean_csv_file(CSV_FILENAME)
+
+
+if __name__ == '__main__':
+    start_time = time()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(async_main())
+    print(f"Total execution time: {round(time() - start_time, 3)}s")
