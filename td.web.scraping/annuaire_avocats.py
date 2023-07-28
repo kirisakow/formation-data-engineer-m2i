@@ -38,35 +38,39 @@ def clean_csv_file(csv_filename: str) -> None:
 
 
 if __name__ == '__main__':
-    empty_str_placeholder = 'Introuvable'
-    url_base = 'https://www.barreaudenice.com'
-    how_many_pages = 50
-    content_to_save = [['nom_prenom', 'adresse', 'email', 'telephone']]
-    csv_filename = 'annuaire_avocats.csv'
+    EMPTY_DATA_PLACEHOLDER = 'Introuvable'
+    URL_BASE = 'https://www.barreaudenice.com'
+    URL_PATH = '/annuaire/avocats/?fwp_paged={0}'
+    HOW_MANY_PAGES = 50
+    CSV_FILENAME = 'annuaire_avocats.csv'
 
-    with open(csv_filename, 'w', encoding='utf8') as f_to_write:
+    with open(CSV_FILENAME, 'w', encoding='utf8') as f_to_write:
         f_to_write.write('')
 
-    for fwp_page in trange(1, how_many_pages + 1):
-        url_path = f'/annuaire/avocats/?fwp_paged={fwp_page}'
-        html_content = requests.get(url_base + url_path).text
+    header = ['nom_prenom', 'adresse', 'email', 'telephone']
+    page_data = [header]
+    for fwp_page in trange(1, HOW_MANY_PAGES + 1):
+        url_path = URL_PATH.format(fwp_page)
+        html_content = requests.get(URL_BASE + url_path).text
         soup = BeautifulSoup(html_content, 'html.parser')
-        for info_avocat in tqdm(soup.find_all('div', class_='annuaire-single'), leave=False):
+        for info_avocat in tqdm(soup.find_all('div', class_='annuaire-single'),
+                                leave=False):
             nom_prénom = info_avocat.find('h3')
             adresse = info_avocat.find('span', class_='adresse')
             email = info_avocat.find('span', class_='email')
             telephone = info_avocat.find('span', class_='telephone')
-            tmp = []
-            for v in [nom_prénom, adresse, email, telephone]:
-                if v is None:
-                    tmp.append(empty_str_placeholder)
+            individual_contact_data = []
+            for html_content in [nom_prénom, adresse, email, telephone]:
+                if html_content is None:
+                    individual_contact_data.append(EMPTY_DATA_PLACEHOLDER)
                 else:
-                    tmp.append(clean_html_content(v.text))
-            if tmp not in content_to_save:
-                content_to_save.append(tmp)
-        with open(csv_filename, 'a') as f:
+                    clean_html = clean_html_content(html_content.text)
+                    individual_contact_data.append(clean_html)
+            if individual_contact_data not in page_data:
+                page_data.append(individual_contact_data)
+        with open(CSV_FILENAME, 'a') as f:
             writer = csv.writer(f)
-            writer.writerows(content_to_save)
-            content_to_save = []
+            writer.writerows(page_data)
+            page_data = []
 
-    clean_csv_file(csv_filename)
+    clean_csv_file(CSV_FILENAME)
